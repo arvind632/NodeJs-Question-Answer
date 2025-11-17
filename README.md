@@ -445,9 +445,13 @@ A Buffer in Node.js is a temporary memory space used to store binary data. It is
 JavaScript in browsers primarily works with strings and objects, but in Node.js you often handle:
 
 🔸File system data (fs)
+
 🔸Network data (HTTP, TCP)
+
 🔸Image uploads
+
 🔸Audio/Video streams
+
 🔸Other raw binary data
 
 These types of data are binary, not plain text.
