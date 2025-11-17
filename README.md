@@ -206,30 +206,40 @@ pm2 start server.js -i max
 
 For improve API performance we need to work over 2 things.
 ### 1. Code-Level Optimization
-      🔸Use Async/Await, Promises for optimize scalable code 
-      🔸Avoid heavy operations inside loops.
-      🔸Use efficient array methods like (map, reduce)
-      🔸Optimize Middleware : Unnecessary middleware slows Node.js app.
-         Avoid too many app.use()
-         Don’t use bodyParser for all routes
-         Don’t log everything in production
-         Use route-specific middleware
-      🔸 Reduce JSON Response Size 
-      🔸 We can use Load Testing (JMeter) and identify the slow API endpoint and optimize them
-      🔸Optimize Database Queries : 
-        Add proper indexes for DB table
-        Avoid SELECT * from DB query
-        Use caching for repeated queries 
-        Use connection pooling for avoid too many connections error and fast response.
+🔸Use Async/Await, Promises for optimize scalable code 
+
+🔸Avoid heavy operations inside loops.
+
+🔸Use efficient array methods like (map, reduce)
+
+🔸Optimize Middleware : Unnecessary middleware slows Node.js app.
+    Avoid too many app.use()
+    Don’t use bodyParser for all routes
+    Don’t log everything in production
+    Use route-specific middleware
+ Reduce JSON Response Size 
+
+🔸 We can use Load Testing (JMeter) and identify the slow API endpoint and optimize them
+
+🔸Optimize Database Queries : 
+    Add proper indexes for DB table
+    Avoid SELECT * from DB query
+    Use caching for repeated queries 
+    Use connection pooling for avoid too many connections error and fast response.
         
 
 ### 2. Infrastructure-Level Optimization
-      🔸 Use Redis caching
-      🔸 Use PM2 with Cluster
-      🔸 Use CDN for static file like (images, video, pdf, document,fonts, css, js )
-      🔸 Use load Balancer 
-      🔸 Use connection pooling
-      🔸 Optimize Environment
+🔸 Use Redis caching
+
+🔸 Use PM2 with Cluster
+
+🔸 Use CDN for static file like (images, video, pdf, document,fonts, css, js )
+
+🔸 Use load Balancer 
+
+🔸 Use connection pooling
+
+🔸 Optimize Environment
 
 
 
