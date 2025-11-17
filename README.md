@@ -277,6 +277,8 @@ Body-parser reads and parses incoming HTTP request bodies for POST, PUT, PATCH.
 CORS (Cross-Origin Resource Sharing) allows requests from different domains.
 
 
+---
+
 ### 📌 10. How to create a DB connection and  complete API in node js using async/await ?
 
 A scalable Node.js app uses a singleton database connection file.
@@ -349,11 +351,16 @@ router.get('/list', studentController.getStudents);
 module.exports = router;
 
 ```
+---
+
 ###  📌 11. What is .env?
 It is a environmental file and store sensitive data like DB Credential, API Keys, Server Port and any other credentials.
 
+---
+
 ### 📌 12. How to implement authentication in node js?
 We can use JWT (JSON Web Token) for authentication and authorization both.
+
 
 ## How to implement JWT in node js application?
 
@@ -362,6 +369,7 @@ We can use JWT (JSON Web Token) for authentication and authorization both.
 
 Example: 
 helper/jwt.js
+
 ```js
 const jwt = require("jsonwebtoken");
 
@@ -435,6 +443,7 @@ A Buffer in Node.js is a temporary memory space used to store binary data. It is
 
 ### Why Buffers Are Needed 
 JavaScript in browsers primarily works with strings and objects, but in Node.js you often handle:
+
 🔸File system data (fs)
 🔸Network data (HTTP, TCP)
 🔸Image uploads
