@@ -485,6 +485,153 @@ Buffers are implemented in C++ behind the scenes for performance. It is used for
 ---
 
 
+## 📌 17. What is fs in Node.js?
+The fs (File System) module in Node.js allows your application to read, write, update, delete, rename, and manage files or folders directly from the server.
+
+### Common Use Cases
+
+| Operation               | Description                  | Method            |
+| ----------------------- | ---------------------------- | ----------------- |
+| 📖 **Read a file**      | Load file content            | `fs.readFile()`   |
+| ✍️ **Write to a file**  | Create or overwrite a file   | `fs.writeFile()`  |
+| 🔁 **Append content**   | Add data to an existing file | `fs.appendFile()` |
+| 🗑 **Delete a file**    | Remove a file                | `fs.unlink()`     |
+| 📦 **Rename a file**    | Change file name             | `fs.rename()`     |
+| 📁 **Create directory** | Make a new folder            | `fs.mkdir()`      |
+| 🧹 **Remove directory** | Delete a folder              | `fs.rmdir()`      |
+
+---
+
+## 📌 17. What is a Child Process in Node.js?
+
+In Node.js, a child process is a separate process that runs independently alongside your main Node.js application.
+It allows you to execute system commands, run scripts, or perform heavy tasks outside the main event loop.
+
+## 🧠 Why do we need Child Processes?
+Node.js runs on a single thread, so heavy CPU tasks can block the event loop and slow your entire app.
+Child processes help by:
+✔ Running heavy tasks in the background
+✔ Preventing blocking of the main thread
+✔ Allowing parallel work
+✔ Using multiple CPU cores
+✔ Running external programs (Python, Shell, etc.)
+
+## 🧩Methods to Create Child Processes
+
+Node.js provides FOUR methods:
+
+1️⃣ exec()
+Runs a command in the shell, returns output as a string.
+
+2️⃣ spawn()
+Runs a command and streams output (best for long tasks).
+
+3️⃣ fork()
+Creates a new Node.js process and allows messaging between parent-child.
+
+4️⃣ execFile()
+Runs a file directly without a shell (faster + safer).
+
+## 🧠 Child Process vs Cluster (Difference)
+
+| Feature       | Child Process            | Cluster                        |
+| ------------- | ------------------------ | ------------------------------ |
+| Purpose       | Run commands/scripts     | Scale Node.js across CPU cores |
+| Communication | Manual messaging         | Built-in load balancing        |
+| Usage         | System tasks, heavy jobs | High traffic APIs              |
+
+---
+
+
+
+## 📌 18. What is Process?
+process is a global object in Node.js that provides information and control over the current Node.js application. It exposes various runtime details such as:
+
+Process ID
+
+Platform (OS)
+
+Node.js version
+
+Environment variables
+
+Execution arguments
+
+Memory usage
+
+Uptime
+
+
+---
+
+
+## 📌 19. What is Crypto?
+It allows you to perform encryption, decryption, hashing, and digital signing operations to securely protect data.
+
+---
+
+## 📌 20. What are Streams?
+
+Streams in Node.js are data-handling pipelines that allow you to read or write large amounts of data in small chunks, rather than loading everything into memory at once.
+
+A simple example is watching a YouTube video while it's still loading — you receive the video in small parts instead of downloading the full file first.
+
+🧠 Why Streams Are Needed
+
+If you try to load a very large file (e.g., a 2 GB video) using fs.readFile(), Node.js will attempt to load the entire file into memory, which can:
+
+Slow down the server
+
+Increase memory usage
+
+Even crash the server
+With streams, Node.js reads the same file piece by piece, making it far more efficient and safe.
+
+| Use Case                     | Description                                           |
+| ---------------------------- | ----------------------------------------------------- |
+| 📂 **Large File Handling**   | Read/write multi-GB files without crashing the server |
+| 📦 **File Uploads**          | Handle user uploads in chunks                         |
+| 🎥 **Video/Audio Streaming** | Stream media to users instead of sending full file    |
+| 🧩 **Data Compression**      | Use `zlib` for compression/decompression              |
+| 🔗 **Large API Responses**   | Send big responses without buffering everything       |
+
+
+Types of Streams in Node.js
+
+Readable Stream – reads data (e.g., fs.createReadStream)
+
+Writable Stream – writes data (e.g., fs.createWriteStream)
+
+Duplex Stream – can read and write (e.g., TCP sockets)
+
+Transform Stream – modifies data while reading/writing (e.g., zlib compression)
+
+
+### Example: Reading a File Using a Readable Stream
+
+```js
+
+const fs = require('fs');
+
+const readStream = fs.createReadStream('bigfile.txt', 'utf8');
+
+readStream.on('data', (chunk) => {
+  console.log("Received chunk:", chunk);
+});
+
+readStream.on('end', () => {
+  console.log("Finished reading file");
+});
+
+
+```
+---
+
+## 📌 21. What is Zlib?
+
+
+---
+
 
 
 
