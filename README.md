@@ -219,8 +219,7 @@ For improve API performance we need to work over 3 things.
 
 🔸Use Pagination for handle the large data.
 
-🔸Use Cacheing (Radis) for Cache repetitive queries to reduce database load.
-
+🔸Use Cacheing (Radis) for Cache repeated queries to reduce database load.
 
 🔸Optimize Middleware : Unnecessary middleware slows Node.js app.
     Avoid too many app.use()
