@@ -211,28 +211,16 @@ pm2 start server.js -i max
 For improve API performance we need to work over 3 things.
 
 ### 1. Code-Level Optimization
+
 🔸Use Async/Await & Non-Blocking Code. 
 
-🔸Avoid heavy operations inside loops.
-
-🔸Use efficient array methods like (map, reduce).
+🔸Avoid heavy operations inside loops and Use efficient array methods like (map, reduce, filter,find, some).
 
 🔸Use Pagination for handle the large data.
 
 🔸Use Cacheing (Radis) for Cache repeated queries to reduce database load.
 
-🔸Optimize Middleware : Unnecessary middleware slows Node.js app.
-    Avoid too many app.use()
-
-    Don’t use bodyParser for all routes
-
-    Don’t log everything in production
-
-    Use route-specific middleware
-
-    Reduce JSON Response Size 
-
-🔸 We can use Load Testing (JMeter) and identify the slow API endpoint and optimize them
+🔸 We can use Load Testing (JMeter) and identify the slow API endpoint and optimize them.
 
 🔸 Optimize Environment : Disable debug logs in production
 
@@ -241,21 +229,19 @@ For improve API performance we need to work over 3 things.
 ### 2. Database-Level Optimization
 Database contributes to nearly 70% of API performance.
 
-🔹 Use Proper indexes on frequently filtered columns.
-
 🔹 Optimize Query Structure : Avoid Select *, Unnecessary Joins, 
 
-🔹 Use Replication & Read/Write Splitting.
-   
-🔹 Use Joins Carefully.
+🔹 Use Proper indexes on frequently filtered columns.
 
-🔹 We can implement sharding for Big Data : It is a distrubeted System splitting one large database into many smaller databases so the system becomes faster.
+🔹 Use Replication & Read/Write data: One server (Master) writes the data and other servers (Replicas) copy that data in real time.
+   
+🔹 Use sharding for Big Data : It is a distrubeted System splitting one large database into many smaller databases so the system becomes faster.
 
 🔹 Choose the Right DB
 
 For relational data → We can go with MySQL/PostgreSQL.
 
-For large writable data → We can go with MongoDB. 
+For non-relational data → We can go with MongoDB. 
 
 For large-scale search → We can go with Elasticsearch.
 
@@ -322,8 +308,12 @@ Body-parser reads and parses incoming HTTP request bodies for POST, PUT, PATCH.
 ---
 
 ### 📌 9. What is CORS?
-CORS (Cross-Origin Resource Sharing) allows requests from different domains.
+CORS is a browser security mechanism that prevents one domain from accessing another domain’s API. Without CORS Allowed, Browser response :  Blocked by CORS policy
+Because backend did NOT allow the frontend domain.
 
+And using CORS Backend can allow the fronted.
+
+app.use(cors({ origin: "http://myfrontend.com" })); 
 
 ---
 
