@@ -218,19 +218,17 @@ For improve API performance we need to work over 3 things.
 
 🔸Optimize Middleware : Unnecessary middleware slows Node.js app.
     Avoid too many app.use()
+
     Don’t use bodyParser for all routes
+
     Don’t log everything in production
+
     Use route-specific middleware
- Reduce JSON Response Size 
+
+    Reduce JSON Response Size 
 
 🔸 We can use Load Testing (JMeter) and identify the slow API endpoint and optimize them
 
-🔸Optimize Database Queries : 
-    Add proper indexes for DB table
-    Avoid SELECT * from DB query
-    Use caching for repeated queries 
-    Use connection pooling for avoid too many connections error and fast response.
-        
 
 ### 2. Infrastructure-Level Optimization
     
