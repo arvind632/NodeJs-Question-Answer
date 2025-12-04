@@ -266,11 +266,13 @@ Good
    
 🔹 Use Joins Carefully.
 
-🔹 Use Transaction Only When Needed because it distrubeted system and expensive.
+🔹 Use Transaction Only When Needed because it is expensive. It ensure that multiple SQL operations execute safely. 
 
 🔹 For heigh speed use MongoDB or Redis when data is not relational.
 
 🔹 In the case of Big Data—when a table contains millions or billions of records—we can use Elasticsearch for faster search and retrieval.
+
+🔹 We can implement sharding for large data : It is a distrubeted System splitting one large database into many smaller databases so the system becomes faster.
 
 ---
 
