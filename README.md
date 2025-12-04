@@ -67,8 +67,11 @@ By default, Node.js runs on a single thread, which means only one CPU core is us
 ### 🔥 Why Cluster is Used?
 It helps to:
 🔸Increase application performance
+
 🔸Improve scalability
+
 🔸Handle high load smoothly
+
 🔸Serve multiple requests in parallel
 
 ### 🚀 How Cluster Works?
@@ -204,9 +207,10 @@ pm2 start server.js -i max
 
 ## 📌 5. How to Improve Node Js API Performance?
 
-For improve API performance we need to work over 2 things.
+For improve API performance we need to work over 3 things.
+
 ### 1. Code-Level Optimization
-🔸Use Async/Await, Promises for optimize scalable code 
+🔸Use Async/Await & Non-Blocking Code. 
 
 🔸Avoid heavy operations inside loops.
 
@@ -229,19 +233,44 @@ For improve API performance we need to work over 2 things.
         
 
 ### 2. Infrastructure-Level Optimization
-🔸 Use Redis caching
+    
+    These improve scalability and handle high traffic.
 
-🔸 Use PM2 with Cluster
+🔸 Use Redis caching : Caching reduces DB hits by 60–80%.
+
+🔸 Use PM2 with Cluster : Use all CPU cores
 
 🔸 Use CDN for static file like (images, video, pdf, document,fonts, css, js )
 
-🔸 Use load Balancer 
+🔸 Use load Balancer (Nginx) : Distributes load across multiple Node instances.
 
-🔸 Use connection pooling
+🔸 Use connection pooling : Avoids too many connections and speeds up db queries.
 
-🔸 Optimize Environment
+🔸 Optimize Environment : Disable debug logs in production
 
 
+### 3. Database-Level Optimization
+Database contributes to nearly 70% of API performance.
+🔹 Indexing: Proper indexes on frequently filtered columns .
+
+🔹 Optimize Query Structure
+Bad:
+```js
+    SELECT * FROM users;
+```
+
+Good
+```js
+    SELECT id, name, email FROM users WHERE id = ?
+```
+   
+🔹 Use Joins Carefully.
+
+🔹 Use Transaction Only When Needed because it distrubeted system and expensive.
+
+🔹 For heigh speed use MongoDB or Redis when data is not relational.
+
+🔹 In the case of Big Data—when a table contains millions or billions of records—we can use Elasticsearch for faster search and retrieval.
 
 ---
 
