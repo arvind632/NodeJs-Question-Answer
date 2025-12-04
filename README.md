@@ -229,12 +229,13 @@ For improve API performance we need to work over 3 things.
 
 🔸 We can use Load Testing (JMeter) and identify the slow API endpoint and optimize them
 
+🔸 Optimize Environment : Disable debug logs in production
+
 
 ### 2. Infrastructure-Level Optimization
     
     These improve scalability and handle high traffic.
 
-🔸 Use Redis caching : Caching reduces DB hits by 60–80%.
 
 🔸 Use PM2 with Cluster : Use all CPU cores
 
@@ -242,9 +243,13 @@ For improve API performance we need to work over 3 things.
 
 🔸 Use load Balancer (Nginx) : Distributes load across multiple Node instances.
 
+🔸 Use Redis caching : Caching reduces DB hits by 60–80%.
+
 🔸 Use connection pooling : Avoids too many connections and speeds up db queries.
 
-🔸 Optimize Environment : Disable debug logs in production
+🔸 Enable Compression (Gzip) : Compress responses at infrastructure level
+
+🔸 Use Horizontal Scaling (Multiple Servers) : Multiple EC2 instances
 
 
 ### 3. Database-Level Optimization
