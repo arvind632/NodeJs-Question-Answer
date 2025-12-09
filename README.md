@@ -539,9 +539,13 @@ It allows you to execute system commands, run scripts, or perform heavy tasks ou
 Node.js runs on a single thread, so heavy CPU tasks can block the event loop and slow your entire app.
 Child processes help by:
 ✔ Running heavy tasks in the background
+
 ✔ Preventing blocking of the main thread
+
 ✔ Allowing parallel work
+
 ✔ Using multiple CPU cores
+
 ✔ Running external programs (Python, Shell, etc.)
 
 ## 🧩Methods to Create Child Processes
