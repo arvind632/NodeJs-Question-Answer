@@ -4,9 +4,9 @@
 
 **Welcome to my GitHub repository!** 🙏
 
-I’ve created a curated collection of important Nodejs interview questions and answers designed specifically for biginner and experienced developers.
+I’ve created a collection of important Nodejs interview questions and answers designed specifically for biginner and experienced developers.
 
-These questions cover core fundamentals, advanced concepts, real-world examples, and deep explanations across the entire NodeJS.
+These questions cover core fundamentals, advanced concepts, real-world examples, and deep explanations across the entire NodeJS. It will definitely improve your Node.js knowladge.
 
 **If you go through these Q&A sets, you will:**
 
