@@ -821,14 +821,17 @@ api/v2/users
 
 ```
 8.  Implement Pagination for Large Lists.
-``js  
-GET /users?page=2&limit=20
-```
 
+```js  
+GET /users?page=2&limit=20
+
+```
 9.  Implement Authentication & Authorization for secure API.
 JWT tokens
 
 ---
+
+
 
 ## 26.  What is the vulnerability/Cons/Disadvantage of Express js?
 
