@@ -532,6 +532,8 @@ The fs (File System) module in Node.js allows your application to read, write, u
 
 ## 📌 17. What is a Child Process in Node.js?
 
+A child process allows your Node.js app to run multiple tasks in parallel, instead of blocking the main event loop.
+
 In Node.js, a child process is a separate process that runs independently alongside your main Node.js application.
 It allows you to execute system commands, run scripts, or perform heavy tasks outside the main event loop.
 
@@ -660,6 +662,236 @@ readStream.on('end', () => {
 ---
 
 ## 📌 21. What is Zlib?
+Zlib is a built-in Node.js module that provides compression and decompression functionality.
+
+---
+
+## 📌 22.  What is libuv?
+libuv is a C-based library used internally by Node.js to handle all asynchronous operations. It is the engine behind Node.js’s event loop.
+
+### What libuv does?
+✔ 1. Implements the Event Loop for node js.
+     Manage all asynchronous  events :  setTimeOut, setInterval, Promises, NewWork Request, Disk Read/Write, Database operations.
+
+✔ 2. Manages the Thread Pool :
+ The following Node.js operations run inside the libuv thread pool:
+
+### 🔹 File System Operations (fs)
+
+```js
+fs.readFile()
+fs.writeFile()
+fs.stat()
+```
+### 🔹 DNS lookup (dns.lookup)
+
+### 🔹 Crypto operations
+
+```js
+crypto.pbkdf2()
+crypto.scrypt()
+crypto.randomBytes()
+
+```
+
+### 🔹 Compression (zlib)
+
+```js
+zlib.gzip()
+
+```
+
+Node.js thread pool has 4 threads by default. and you can increase it upto max 128.
+```js
+process.env.UV_THREADPOOL_SIZE = 10;
+```
+### How Thread Pool Works (Simple Steps)
+1. JavaScript calls a blocking function like fs.readFile().
+2. Event loop sends this task to the thread pool and a background thread executes the task.
+3. When finished, the thread sends the result back.
+4. The event loop calls your callback or resolves your Promise.
+
+
+---
+
+
+## 23. What is memory leak in node js?
+
+A memory leak in Node.js happens when your application keeps using memory but never releases it.
+Memory leak can slows down the server and crashes the app.
+
+### Why Memory Leaks Happen in Node.js
+Global Variables
+Unused Timers & Intervals
+Event Listeners Not Removed : Adding listeners repeatedly without removing:
+Closures Holding Memory :  Functions keep variables alive even when not needed.
+
+### How to Detect Memory Leaks
+pm2 monit
+pm2 logs
+
+### How to Prevent Memory Leaks
+Avoid unnecessary global variables.
+Always clear intervals & timeouts: clearInterval(timer)
+Remove event listeners.
+Monitor memory usage: console.log(process.memoryUsage());
+
+---
+
+## 24.  What is Garbage Collector?
+It is an automatic memory management system .
+When run any program in javaScript or Node Js , the Engine store variable and functions in memory.
+But when they are no longer used the Garbage Collector detects them and cleans them automatically.
+
+### How Garbage Collector Works in Node.js
+Node.js uses V8’s garbage collector, which finds unused memory and clean it.
+
+
+---
+
+## 25. What is the Standard Patterns for a REST API.
+
+1.  Use Proper HTTP Methods.
+
+| Action      | HTTP Method     |
+| ----------- | --------------- |
+| Get data    | **GET**         |
+| Create data | **POST**        |
+| Update data | **PUT / PATCH** |
+| Delete data | **DELETE**      |
+
+2.  Use Meaningful end point.
+
+get/users  |  post/users |  get/users/1
+
+3.  Follow Plural Naming Convention.
+  /users  |  /products   |   /orders
+  
+4.  Return proper http status code
+
+| Status Code | Meaning               |
+| ----------- | --------------------- |
+| **200**     | Success               |
+| **201**     | Resource created      |
+| **400**     | Bad request           |
+| **401**     | Unauthorized          |
+| **404**     | Not found             |
+| **500**     | Internal server error |
+
+5.  Use JSON Format for Input & Output.
+
+{
+  "name": "Arvind",
+  "email": "arvind@example.com"
+}
+
+6.  Create Version compatible API URL.
+api/v1/users , api/v2/users
+
+7.  Use Consistent Response Structure.
+
+{
+  "success": true,
+  "data": { },
+  "message": "User created successfully"
+}
+
+8.  Implement Pagination for Large Lists.
+  GET /users?page=2&limit=20
+
+9.  Implement Authentication & Authorization for secure API.
+JWT tokens
+
+---
+
+## 26.  What is the vulnerability/Cons/Disadvantage of Express js?
+
+###  No Default Security Headers
+
+We can prevent Http security headers by Helment. Helmet set Http security header such as:
+
+1. XSS : Prevent XSS attacks (Cross-Site Scripting) from browser.
+Where an attacker injects harmful scripts into a website, and that script runs in the browser of other users.
+2. Clickjacking: Prevent Clickjacking attacks.
+3. MIME sniffing: Prevent MIME sniffing
+4. HSTS: Forces HTTPS
+
+Easy to Use — One line setup
+```js
+const helmet = require("helmet");
+app.use(helmet())
+```
+
+### Body Parser Attacks (Large Payload Attack)
+Attackers can send very large JSON POST requests to crash your server.
+Fix: Limit payload size
+
+```js
+
+app.use(express.json({ limit: "50kb" }));
+
+```
+
+### No Rate Limiting   (Brute force Attacks)
+A brute force attack occurs when an attacker repeatedly hits the login API using automated tools, bots, or scripts, trying all possible combinations of usernames and passwords until they find the correct one.
+
+Rate Limiting is a security used to control how many requests a client (IP, user, token) can send to your server within a specific time period.
+
+Rate limiting ensures a user cannot hit your server too many times in a short duration.
+
+Example:
+"Maximum 100 requests per IP per 15 minutes."
+If a client exceeds the limit, the server blocks them temporarily.
+
+### Why do we need rate limiting?
+1. Prevent DDoS attacks
+2. Protect server CPU & memory utilization and Avoid high cloud billing due to unwanted requests.
+
+### How Rate Limiting Works (Step-by-Step)
+1. Client sends a request
+2. Server tracks how many times the client (IP) has requested in a time window
+3. If request count is within limit → Allowed
+4. If client exceeds limit → Blocked or throttled and Limit resets after time window ends.
+
+### Common Libraries for Rate Limiting in Node.js :  express-rate-limit
+
+```js
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+  windowMs:1000*30, // 30 seconds
+  max:5
+});
+
+app.use(limiter);
+
+```
+
+### CORS Misconfiguration : 
+use correctally and Prevent unauthorize API calls.
+
+
+### xss- = Server-side Input Sanitization.
+use sanitize-html and prevent xss.
+
+### CSRF Attacks (Cross-Site request forgery)
+Use JWT and prevent CSRF attack.
+
+
+### Directory Traversal
+If static folder is not properly configured, user might access unwanted files.
+
+
+
+
+
+
+  
+
+
+
+---
+
+## 📌 23.  
 
 
 ---
