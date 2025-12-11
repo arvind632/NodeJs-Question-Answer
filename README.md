@@ -722,18 +722,26 @@ Memory leak can slows down the server and crashes the app.
 
 ### Why Memory Leaks Happen in Node.js
 Global Variables
+
 Unused Timers & Intervals
-Event Listeners Not Removed : Adding listeners repeatedly without removing:
-Closures Holding Memory :  Functions keep variables alive even when not needed.
+
+Event Listeners Not Removed : Adding listeners repeatedly without removing
+
+Closures remember Memory :  Functions keep variables alive even when not needed.
 
 ### How to Detect Memory Leaks
+```js
 pm2 monit
-pm2 logs
 
+pm2 logs
+```
 ### How to Prevent Memory Leaks
 Avoid unnecessary global variables.
+
 Always clear intervals & timeouts: clearInterval(timer)
+
 Remove event listeners.
+
 Monitor memory usage: console.log(process.memoryUsage());
 
 ---
@@ -753,22 +761,28 @@ Node.js uses V8’s garbage collector, which finds unused memory and clean it.
 
 1.  Use Proper HTTP Methods.
 
+```js
 | Action      | HTTP Method     |
 | ----------- | --------------- |
 | Get data    | **GET**         |
 | Create data | **POST**        |
 | Update data | **PUT / PATCH** |
 | Delete data | **DELETE**      |
-
+```
 2.  Use Meaningful end point.
-
+```js
 get/users  |  post/users |  get/users/1
 
+```
 3.  Follow Plural Naming Convention.
-  /users  |  /products   |   /orders
-  
+
+```js  
+/users  |  /products   |   /orders
+
+```
 4.  Return proper http status code
 
+```js
 | Status Code | Meaning               |
 | ----------- | --------------------- |
 | **200**     | Success               |
@@ -778,26 +792,38 @@ get/users  |  post/users |  get/users/1
 | **404**     | Not found             |
 | **500**     | Internal server error |
 
+```
 5.  Use JSON Format for Input & Output.
 
+```js
 {
   "name": "Arvind",
   "email": "arvind@example.com"
 }
 
+```
+
 6.  Create Version compatible API URL.
-api/v1/users , api/v2/users
+
+```js
+api/v1/users 
+api/v2/users
+```
 
 7.  Use Consistent Response Structure.
 
+```js
 {
   "success": true,
   "data": { },
   "message": "User created successfully"
 }
 
+```
 8.  Implement Pagination for Large Lists.
-  GET /users?page=2&limit=20
+``js  
+GET /users?page=2&limit=20
+```
 
 9.  Implement Authentication & Authorization for secure API.
 JWT tokens
@@ -883,19 +909,7 @@ If static folder is not properly configured, user might access unwanted files.
 
 
 
-
-
-  
-
-
-
 ---
-
-## 📌 23.  
-
-
----
-
 
 
 
