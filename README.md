@@ -910,9 +910,10 @@ Use JWT and prevent CSRF attack.
 If static folder is not properly configured, user might access unwanted files.
 
 
-## 27. WHat is the Microservice Architecture for Rest API?
+## 27. What is the Microservice Architecture for Rest API?
 
 The Microservice architecture mainly consists of 5 core components:
+
 1️⃣ Client – Web or Mobile application.
 
 2️⃣ API Gateway – Entry point that handles routing, authentication, and Security Checklist.
