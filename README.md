@@ -632,7 +632,7 @@ With streams, Node.js reads the same file piece by piece, making it far more eff
 
 Types of Streams in Node.js
 
-Readable Stream – reads data (e.g., fs.createReadStream)
+Readable Stream – reads data (e.g., fs.createReadStream(path, options) )
 
 Writable Stream – writes data (e.g., fs.createWriteStream)
 
@@ -646,17 +646,34 @@ Transform Stream – modifies data while reading/writing (e.g., zlib compression
 ```js
 
 const fs = require('fs');
+const path = require('path');
 
-const readStream = fs.createReadStream('bigfile.txt', 'utf8');
+const filePath = "public/bigfile.txt";
 
+const readStream = fs.createReadStream(filePath, {
+  encoding: "utf-8",
+  highWaterMark: 64 * 1024 // 64 KB chunks (efficient)
+ }
+  );
+
+// Stream error handling
+
+readStream.on("error", (error) => {
+  console.error("Stream error:", error);
+});
+
+// Invok once start Stream 
 readStream.on('data', (chunk) => {
   console.log("Received chunk:", chunk);
 });
 
+// Invok once Stream End 
 readStream.on('end', () => {
   console.log("Finished reading file");
 });
 
+// This is the way to get stream data
+readStream.pipe(res);
 
 ```
 ---
