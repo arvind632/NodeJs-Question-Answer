@@ -399,6 +399,103 @@ It is a environmental file and store sensitive data like DB Credential, API Keys
 ### 📌 12. How to implement authentication in node js?
 We can use JWT (JSON Web Token) for authentication and authorization both.
 
+JWT used default Secure Hash Algorithms - 256 (SHA-256) for generate token.
+
+## 🔐 JWT Token Creation – Entire Process
+
+##  Step 1: User Authenticates
+
+User logs in with credentials.
+
+```js
+
+POST /login → username + password
+
+```
+
+Server: Verifies credentials and decides to issue a JWT
+
+## Step 2: Create the JWT token  based on some keys : HEDER , PAYLOAD , SIGNATURE
+
+```js
+
+HEADER.PAYLOAD.SIGNATURE
+
+```
+1️⃣ Header – It define the Algorithms and token types.
+
+```js
+{
+  "alg": "HS256",
+  "typ": "JWT",
+  "expiresIn" : "1h"
+}
+
+```
+alg → how the signature is created
+
+typ → token type (JWT)
+
+2️⃣ PAYLOAD - Payload is the actual data inside the token and it can be user information, Permissions, Token Validity.
+
+```js
+
+const payload = {
+    username: "admin",
+    role: "admin"
+};
+```
+
+⚠️ Important :  Payload is NOT encrypted, Anyone can read it. So newer store password or secret key inside.
+
+
+3️⃣ SIGNATURE  : It is the secret key like : secret_key
+
+```js
+
+
+const token = jwt.sign(payload, SECRET_KEY, {
+    algorithm: "HS256",
+    expiresIn: "1h"
+  });
+
+```
+
+## Step 3 : Send back token to client
+
+Client stores token: 
+
+Memory
+
+HTTP-only cookie
+
+Local storage (not recommended)
+
+
+## Step 4: Client Sends Token with Other Requests
+
+```js
+
+GET /dashboard
+Authorization: Bearer <JWT_TOKEN>
+
+
+```
+
+## Step 5: Verify Token Middleware
+
+```js
+  const token  = req.headers.authorization.split(" ")[1];
+  jwt.verify(token, SECRET_KEY);
+
+```
+
+
+
+
+
+
+ 
 
 ## How to implement JWT in node js application?
 
