@@ -834,6 +834,12 @@ process.env.UV_THREADPOOL_SIZE = 10;
 A memory leak in Node.js happens when your application keeps using memory but never releases it.
 Memory leak can slows down the server and crashes the app.
 
+A memory leak happens when objects are no longer needed but are still referenced, so the garbage collector cannot free them. Over time, memory usage keeps increasing and the app slows or crashes.
+
+## One-Line Memory Trick
+If memory grows after traffic stops, you have a leak.
+
+
 ### Why Memory Leaks Happen in Node.js
 Global Variables
 
@@ -846,9 +852,30 @@ Closures remember Memory :  Functions keep variables alive even when not needed.
 ### How to Detect Memory Leaks
 ```js
 pm2 monit
-
 pm2 logs
+
+process.memoryUsage()
+
+node --inspect app.js
+
 ```
+
+## Open Chrome:
+
+```js
+chrome://inspect
+```
+1️⃣ Monitor memory trends
+
+2️⃣ Take heap snapshots
+
+3️⃣ Compare retained objects
+
+4️⃣ Fix references
+
+5️⃣ Add alerts
+
+
 ### How to Prevent Memory Leaks
 Avoid unnecessary global variables.
 
@@ -857,6 +884,32 @@ Always clear intervals & timeouts: clearInterval(timer)
 Remove event listeners.
 
 Monitor memory usage: console.log(process.memoryUsage());
+
+## Set Memory Limits (Production Safety Net)
+node --max-old-space-size=4096 app.js
+
+✔ Prevents server crash
+✔ Forces restart if leak exists
+
+## Use PM2 for Auto Restart
+pm2 start app.js --max-memory-restart 500M
+
+## Common Leak Checklist (Save This)
+✅ No globals
+
+✅ Remove listeners
+
+✅ Clear timers
+
+✅ Limit cache
+
+✅ Use streams
+
+✅ Close connections
+
+✅ Avoid large closures
+
+✅ Resolve promises
 
 ---
 
