@@ -1110,6 +1110,71 @@ This approach helps in achieving:
 ---
 
 
+## 📌 28 Can you explain the event loop in Node.js and how it handles asynchronous operations?
+
+It is a mechanism that allow node js to perform non-blocking, asynchronous operations using  a single thread.
+
+This is the flow of Asynchronous operation in node js.
+
+Event Loop >> CallBack Queue >> Node APIs / Livuv >> Call Stack
+
+
+Call Stack → Executes synchronous code
+
+Node APIs (libuv) → Handles async tasks (I/O, timers, network)
+
+Callback Queues → Stores completed async callbacks
+
+Event Loop → Pushes callbacks to the call stack
+
+
+
+The **Event Loop** is a core part of the **JavaScript runtime environment**, responsible for managing **asynchronous operations** without blocking the main thread.
+Because JavaScript is **single-threaded**, means it can run only **one task at a time** inside a single **call stack**.
+
+However, in the real life applications, developers need to perform multiple operations simultaneously such as:
+* Fetching API data
+* Fetch UI
+* Work with file system
+
+These tasks must run smoothly **without blocking the main thread or freezing the user interface** — To solve this problem,  **Event Loop** was introduced.
+
+
+## ⚙️ How the Event Loop Works
+
+### **1️⃣ JavaScript runs line by line (synchronous) code in the Call Stack**
+
+### **2️⃣ Asynchronous operations are handled by the Browser (Web APIs) or by Node.js (libuv).
+
+Examples:
+
+* `setTimeout`
+* `fetch()`
+* File system calls
+* Event listeners
+
+### **3️⃣ When async tasks finish, callbacks are moved to queues**
+
+There are two main queues:
+
+* **Macrotask Queue** → Timers, DOM events
+* **Microtask Queue** → Promises, async/await
+
+1️⃣ Macro-task Queue 
+   Examples of Macro-tasks:setTimeout, setInterval, DOM events (Click), callback
+2️⃣ Micro-task Queue:
+   High-priority queue — always executed before next macro-task
+   Promise.then(), async/await 
+
+### **4️⃣ Event Loop monitors the Call Stack**
+
+If the Call Stack is **empty**, the Event Loop push callback (Promis & setTimeout) into Call Stack for execution.
+ 
+ So Event loop is continuously checks the callback queue and if there are any Callback then move it from callback queue to call stack and execute.
+
+---
+
+
 
 
 
