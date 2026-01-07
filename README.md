@@ -276,10 +276,10 @@ A CDN  is a network of servers located in different countries. Its job is to del
 
 ### 🟧 Why do we need CDN?
 Because without CDN:
- All users download files from your single server and it is slow.
- If the server is not close to the user, the website will load slower
+ All users download files from your single server and which can make the website slow.
+ If the server is not close to the user, the website will load slower.
  Example:
-      Your server is in India, but a user is in USA. The distance is big , then website loads slow. AND CDN solves this.
+      Your server is in India, but a user is in USA. The distance is big , then website loads slow. AND CDN solves this issue.
 
 ### 🟧 How CDN Works? (Super Easy)
 1. Your main server → Original files.
@@ -1116,7 +1116,7 @@ It is a mechanism that allow node js to perform non-blocking, asynchronous opera
 
 This is the flow of Asynchronous operation in node js.
 
-Event Loop >> CallBack Queue >> Node APIs / Livuv >> Call Stack
+Event Loop >> CallBack Queue >> Node APIs / Libuv  >> Call Stack
 
 
 Call Stack → Executes synchronous code
