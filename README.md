@@ -59,7 +59,7 @@ It uses callbacks, promises, event loop.
 
 ---
 
-## 📌 4. What is Cluster?
+## 📌 4. What is Cluster module?
 
 The Cluster module in Node.js allows you to run multiple instances (workers) of your application so that you can utilize all CPU cores of your system.
 By default, Node.js runs on a single thread, which means only one CPU core is used—even if your system has 4, 8, or 12 cores.
@@ -1112,48 +1112,11 @@ This approach helps in achieving:
 
 ## 📌 28 Can you explain the event loop in Node.js and how it handles asynchronous operations?
 
-It is a mechanism that allow node js to perform non-blocking, asynchronous operations using  a single thread.
+The **Event Loop** is responsible for managing **Phases of async operations** without blocking the main thread.
 
-This is the flow of Asynchronous operation in node js.
+So Event loop work just like a scheduler for all async operations.
 
-Event Loop >> CallBack Queue >> Node APIs / Libuv  >> Call Stack
-
-
-Call Stack → Executes synchronous code
-
-Node APIs (libuv) → Handles async tasks (I/O, timers, network)
-
-Callback Queues → Stores completed async callbacks
-
-Event Loop → Pushes callbacks to the call stack
-
-
-
-The **Event Loop** is a core part of the **JavaScript runtime environment**, responsible for managing **asynchronous operations** without blocking the main thread.
-Because JavaScript is **single-threaded**, means it can run only **one task at a time** inside a single **call stack**.
-
-However, in the real life applications, developers need to perform multiple operations simultaneously such as:
-* Fetching API data
-* Fetch UI
-* Work with file system
-
-These tasks must run smoothly **without blocking the main thread or freezing the user interface** — To solve this problem,  **Event Loop** was introduced.
-
-
-## ⚙️ How the Event Loop Works
-
-### **1️⃣ JavaScript runs line by line (synchronous) code in the Call Stack**
-
-### **2️⃣ Asynchronous operations are handled by the Browser (Web APIs) or by Node.js (libuv).
-
-Examples:
-
-* `setTimeout`
-* `fetch()`
-* File system calls
-* Event listeners
-
-### **3️⃣ When async tasks finish, callbacks are moved to queues**
+Event loop is continuously checks the callback queue and if there are any Callback then move it from callback queue to call stack and execute.
 
 There are two main queues:
 
@@ -1166,16 +1129,64 @@ There are two main queues:
    High-priority queue — always executed before next macro-task
    Promise.then(), async/await 
 
-### **4️⃣ Event Loop monitors the Call Stack**
 
-If the Call Stack is **empty**, the Event Loop push callback (Promis & setTimeout) into Call Stack for execution.
- 
- So Event loop is continuously checks the callback queue and if there are any Callback then move it from callback queue to call stack and execute.
+
+Node.js event loop has 6 main phases, and each phase handles a specific type of callback
+
+1️⃣ Timers Phase : Executes callbacks scheduled by: setTimeout() , setInterval()
+
+2️⃣ I/O Callbacks Phase : Handles callbacks for  Network I/O, File system I/O
+
+3️⃣ Idle, Prepare Phase : Only Used internally by Node Js
+
+4️⃣ Poll Phase ⭐ (Most Important) : Retrieves new I/O events,  Executes I/O callbacks
+
+5️⃣ Check Phase : Executes callbacks scheduled by: setImmediate()
+
+6️⃣ Close Callbacks Phase : Executes cleanup callbacks like socket.on('close'), server.close()
+
+
+
+
+Event Loop → Pushes callbacks to the call stack
+
+Callback Queues → Stores entire async callbacks
+
+Call Stack → The Call Stack manages and executes EC (execution contexts) using the LIFO.
+
+Node APIs (libuv) →  handle async tasks like I/O, timers, and network operations across various event loop phases.
+
 
 ---
 
+## 📌 29 What is event Emitor in nodejs?
+
+It is used to handle asynchronous, event-driven communication.
+It is non-blocking architecture and perfect for async flow.
+They allow objects to emit (trigger) events and other parts of the application to listen and respond to those events.
+
+So Basically there are two things, on and emit.
+
+Emit : used for call a event.
+on :  userd for listener the event.
 
 
+Example 
+```js
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+
+// Listener
+emitter.on('login', (user) => {
+  console.log(`${user} logged in`);
+});
+
+// Emit event
+emitter.emit('login', 'Arvind');
+
+```
+
+---
 
 
 
