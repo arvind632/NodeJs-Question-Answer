@@ -1112,22 +1112,17 @@ This approach helps in achieving:
 
 ## 📌 28 Can you explain the event loop in Node.js?
 
-The **Event Loop** is responsible for managing **Phases of async operations** without blocking the main thread.
+The Event Loop is a mechanism that handles multiple asynchronous operations without blocking the main thread.
 
-So Event loop work just like a scheduler for all async operations.
+It continuously checks the callback queue, moves callbacks from the queue to the call stack, and executes them.
 
-Event loop is continuously checks the callback queue and if there are any Callback then move it from callback queue to call stack and execute.
+### How queues work with the Event Loop (Node.js)
 
-There are two main queues:
+1️⃣ Next Tick Queue (Highest priority) : process.nextTick()
 
-* **Macrotask Queue** → Timers, DOM events
-* **Microtask Queue** → Promises, async/await
+2️⃣ Microtask Queue : Priority queue — always executed before next macro-task:  Promise.then(), queueMicrotask()
 
-1️⃣ Macro-task Queue 
-   Examples of Macro-tasks: setTimeout, setInterval, DOM events (Click), callback
-2️⃣ Micro-task Queue:
-   High-priority queue — always executed before next macro-task
-   Promise.then(), async/await 
+3️⃣ Macrotask Queues (Event Loop Phases) : setTimeout, setInterval, event, network, file system, setImmediate()
 
 
 
