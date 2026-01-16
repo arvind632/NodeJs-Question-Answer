@@ -1114,7 +1114,7 @@ This approach helps in achieving:
 
 The Event Loop is a mechanism that handles multiple asynchronous operations without blocking the main thread.
 
-It continuously checks the callback queue, moves callbacks from the queue to the call stack, and executes them.
+It continuously checks the callback queues, and pushes callbacks to the call stack for execution.
 
 ### How queues work with the Event Loop (Node.js)
 
