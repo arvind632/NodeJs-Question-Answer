@@ -1110,7 +1110,7 @@ This approach helps in achieving:
 ---
 
 
-## 📌 28 Can you explain the event loop in Node.js and how it handles asynchronous operations?
+## 📌 28 Can you explain the event loop in Node.js?
 
 The **Event Loop** is responsible for managing **Phases of async operations** without blocking the main thread.
 
@@ -1124,7 +1124,7 @@ There are two main queues:
 * **Microtask Queue** → Promises, async/await
 
 1️⃣ Macro-task Queue 
-   Examples of Macro-tasks:setTimeout, setInterval, DOM events (Click), callback
+   Examples of Macro-tasks: setTimeout, setInterval, DOM events (Click), callback
 2️⃣ Micro-task Queue:
    High-priority queue — always executed before next macro-task
    Promise.then(), async/await 
@@ -1135,7 +1135,7 @@ Node.js event loop has 6 main phases, and each phase handles a specific type of 
 
 1️⃣ Timers Phase : Executes callbacks scheduled by: setTimeout() , setInterval()
 
-2️⃣ I/O Callbacks Phase : Handles callbacks for  Network I/O, File system I/O
+2️⃣ Callbacks Phase : Handles callbacks for  Network I/O, File system I/O
 
 3️⃣ Idle, Prepare Phase : Only Used internally by Node Js
 
@@ -1155,6 +1155,31 @@ Callback Queues → Stores entire async callbacks
 Call Stack → The Call Stack manages and executes EC (execution contexts) using the LIFO.
 
 Node APIs (libuv) →  handle async tasks like I/O, timers, and network operations across various event loop phases.
+
+Task Queues in Node.js
+
+| Queue Type                             | Examples                             |
+| -------------------------------------- | ------------------------------------ |
+| **Next Tick Queue (Highest priority)** | `process.nextTick()`                 |
+| **Microtask Queue**                    | `Promise.then()`, `queueMicrotask()` |
+| **Macrotask / Event Loop Phases**      | `setTimeout`, `setImmediate`, I/O    |
+
+
+
+### Let me know which one execute before process.nextTick() or promise.then()
+
+process.nextTick() executes before Promise.then() because it has higher priority than the Promise microtask queue in node js.
+
+### What is setImmediate() in the Event Loop?
+
+setImmediate() schedules a callback to run in the Check phase of the Node.js event loop.
+
+
+
+### Execution Priority
+1️⃣ process.nextTick()
+2️⃣ Promise microtasks
+3️⃣ Event loop phases (macrotasks)
 
 
 ---
