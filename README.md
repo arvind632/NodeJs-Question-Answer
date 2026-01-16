@@ -834,7 +834,6 @@ process.env.UV_THREADPOOL_SIZE = 10;
 A memory leak in Node.js happens when your application keeps using memory but never releases it.
 Memory leak can slows down the server and crashes the app.
 
-A memory leak happens when objects are no longer needed but are still referenced, so the garbage collector cannot free them. Over time, memory usage keeps increasing and the app slows or crashes.
 
 ## One-Line Memory Trick
 If memory grows after traffic stops, you have a leak.
@@ -851,19 +850,35 @@ Closures remember Memory :  Functions keep variables alive even when not needed.
 
 ### How to Detect Memory Leaks
 ```js
-pm2 monit
-pm2 logs
+For Production server : pm2 monit
 
-process.memoryUsage()
+For development
+
+console.log(process.memoryUsage());
+
+For Development 
 
 node --inspect app.js
 
 ```
+node --inspect : starts a Node.js application in debug mode with  chrome Devtools.
+--inspect : Enable inspector agent
+
+for more details :  https://nodejs.org/en/learn/getting-started/debugging
+
+
+
+### How it works
+Opens a WebSocket debugging port (default: 9229)
+Pauses or inspects code execution
 
 ## Open Chrome:
 
 ```js
-chrome://inspect
+chrome://inspect  
+
+Click “Open dedicated DevTools for Node”
+
 ```
 1️⃣ Monitor memory trends
 
@@ -875,6 +890,11 @@ chrome://inspect
 
 5️⃣ Add alerts
 
+
+### When to use it
+Debug production issues
+
+Analyze performance
 
 ### How to Prevent Memory Leaks
 Avoid unnecessary global variables.
@@ -1206,7 +1226,41 @@ emitter.emit('login', 'Arvind');
 
 ```
 
+
+## 📌 30 How to debug node js applications?
+ 
+For debug we have to use  : console.log() and console.error() 
+
+And for production we have to use Winston.
+
 ---
+
+## 📌 31 How to debug productions issue in node js ?
+
+In production: 
+
+❌ No console.log() everywhere
+
+❌ No restarting blindly
+
+❌ No attaching debugger casually
+
+Production debugging = observe first, act carefully.
+
+We have to check the server logs to identify the affected file and endpoint.
+Then, we will reproduce the issue in staging or local which is same as like productiopn environment with same payload and conditions and identify the Root Cause  and then we will fix it.
+
+If company allows, we can use: New Relic, Datadog
+
+
+
+---
+
+
+## 📌 31 How to work productions issue?
+
+First we will identify the issue priority like is it critical or Partial and If it is critical then we will fix carefully imadetally.
+
 
 
 
